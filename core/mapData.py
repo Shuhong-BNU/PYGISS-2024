@@ -93,20 +93,8 @@ class MapData:
                         for line in transformed_geom.geoms:
                             transformed_lines.append(list(line.coords))
         return transformed_lines
+###
+dd
 
-    def transform_geometry(self, geom):
-        """将几何对象转换到当前投影"""
-        try:
-            transformed_geom = transform(self.transformer.transform, geom)
-            return transformed_geom
-        except Exception as e:
-            logging.error(f"Error transforming geometry: {e}")
-            return None
+#
 
-    def clear_map(self):
-        """清除地图数据"""
-        self.shapes = []
-        self.records = []  # 清空属性数据
-        self.transformer = Transformer.from_crs(self.crs, self.crs, always_xy=True)
-        self.proj_string = self.crs
-        logging.info("Map data cleared.")
