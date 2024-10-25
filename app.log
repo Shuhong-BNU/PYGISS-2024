@@ -1,0 +1,248 @@
+2024-10-25 09:17:51,691 - INFO - GIS 应用程序启动
+2024-10-25 09:17:51,807 - INFO - Node image loaded from D:\桌面\GIS软件工程\pyGISS-1024\ui\..\images\OIP-C.jpg
+2024-10-25 09:17:51,809 - INFO - 主窗口初始化完成
+2024-10-25 09:17:55,443 - INFO - 导入 Shapefile 功能被调用
+2024-10-25 09:17:59,103 - INFO - Importing shapefile: D:/桌面/GIS软件工程/pyGISS-1024/shapefile/ne_50m_admin_0_countries.shp
+2024-10-25 09:17:59,315 - INFO - Detected CRS: EPSG:4326
+2024-10-25 09:17:59,316 - INFO - Total shapes to process: 241
+2024-10-25 09:17:59,316 - INFO - Imported 241 features from shapefile.
+2024-10-25 09:17:59,771 - INFO - Is circular projection: False
+2024-10-25 09:18:00,215 - INFO - Drawing 1619 polygons.
+2024-10-25 09:18:00,334 - INFO - Drawing 0 lines.
+2024-10-25 09:18:00,777 - INFO - Drawing administrative boundaries.
+2024-10-25 09:18:01,501 - INFO - Is circular projection: False
+2024-10-25 09:18:01,505 - INFO - Shapefile imported, enabling Import Nodes button.
+2024-10-25 09:18:01,505 - INFO - Shapefile imported, enabling Import Nodes button.
+2024-10-25 09:18:06,653 - INFO - 切换投影到: EPSG:3571 - North Pole LAEA Alaska
+2024-10-25 09:18:06,653 - INFO - Changing projection to: EPSG:3571 - North Pole LAEA Alaska
+2024-10-25 09:18:06,658 - INFO - Projection changed to: EPSG:3571
+2024-10-25 09:18:06,662 - INFO - Node projection set to: EPSG:3571
+2024-10-25 09:18:07,148 - INFO - Is circular projection: True
+2024-10-25 09:18:07,582 - INFO - Drawing 1619 polygons.
+2024-10-25 09:18:07,714 - INFO - Drawing 0 lines.
+2024-10-25 09:18:08,171 - INFO - Drawing administrative boundaries.
+2024-10-25 09:18:08,901 - INFO - Is circular projection: True
+2024-10-25 09:18:18,556 - INFO - 导入节点功能被调用
+2024-10-25 09:18:28,713 - INFO - Importing nodes from: D:/桌面/GIS软件工程/pyGISS-1024/projects/french cities.xls
+2024-10-25 09:18:28,743 - INFO - Imported 6 nodes from D:/桌面/GIS软件工程/pyGISS-1024/projects/french cities.xls.
+2024-10-25 09:18:28,749 - INFO - Node projection set to: EPSG:3571
+2024-10-25 09:18:28,749 - INFO - Drawing 6 nodes.
+2024-10-25 09:18:34,157 - INFO - 切换投影到: EPSG:4326 - WGS84
+2024-10-25 09:18:34,157 - INFO - Changing projection to: EPSG:4326 - WGS84
+2024-10-25 09:18:34,161 - INFO - Projection changed to: EPSG:4326
+2024-10-25 09:18:34,166 - INFO - Node projection set to: EPSG:4326
+2024-10-25 09:18:34,639 - INFO - Is circular projection: False
+2024-10-25 09:18:35,057 - INFO - Drawing 1619 polygons.
+2024-10-25 09:18:35,190 - INFO - Drawing 0 lines.
+2024-10-25 09:18:35,633 - INFO - Drawing administrative boundaries.
+2024-10-25 09:18:35,766 - INFO - Drawing 6 nodes.
+2024-10-25 09:18:36,350 - INFO - Is circular projection: False
+2024-10-25 09:20:05,552 - INFO - 更新节点图片尺寸为: 51%
+2024-10-25 09:20:05,552 - INFO - Node scale factor updated to: 0.51
+2024-10-25 09:20:05,553 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,565 - INFO - 更新节点图片尺寸为: 52%
+2024-10-25 09:20:05,565 - INFO - Node scale factor updated to: 0.52
+2024-10-25 09:20:05,565 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,574 - INFO - 更新节点图片尺寸为: 54%
+2024-10-25 09:20:05,575 - INFO - Node scale factor updated to: 0.54
+2024-10-25 09:20:05,575 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,584 - INFO - 更新节点图片尺寸为: 58%
+2024-10-25 09:20:05,584 - INFO - Node scale factor updated to: 0.58
+2024-10-25 09:20:05,585 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,599 - INFO - 更新节点图片尺寸为: 65%
+2024-10-25 09:20:05,600 - INFO - Node scale factor updated to: 0.65
+2024-10-25 09:20:05,600 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,612 - INFO - 更新节点图片尺寸为: 69%
+2024-10-25 09:20:05,612 - INFO - Node scale factor updated to: 0.69
+2024-10-25 09:20:05,612 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,623 - INFO - 更新节点图片尺寸为: 73%
+2024-10-25 09:20:05,623 - INFO - Node scale factor updated to: 0.73
+2024-10-25 09:20:05,623 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,635 - INFO - 更新节点图片尺寸为: 75%
+2024-10-25 09:20:05,635 - INFO - Node scale factor updated to: 0.75
+2024-10-25 09:20:05,635 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,648 - INFO - 更新节点图片尺寸为: 79%
+2024-10-25 09:20:05,648 - INFO - Node scale factor updated to: 0.79
+2024-10-25 09:20:05,648 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,661 - INFO - 更新节点图片尺寸为: 82%
+2024-10-25 09:20:05,661 - INFO - Node scale factor updated to: 0.82
+2024-10-25 09:20:05,661 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,675 - INFO - 更新节点图片尺寸为: 85%
+2024-10-25 09:20:05,675 - INFO - Node scale factor updated to: 0.85
+2024-10-25 09:20:05,676 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,689 - INFO - 更新节点图片尺寸为: 86%
+2024-10-25 09:20:05,689 - INFO - Node scale factor updated to: 0.86
+2024-10-25 09:20:05,690 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,703 - INFO - 更新节点图片尺寸为: 88%
+2024-10-25 09:20:05,703 - INFO - Node scale factor updated to: 0.88
+2024-10-25 09:20:05,704 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,717 - INFO - 更新节点图片尺寸为: 90%
+2024-10-25 09:20:05,718 - INFO - Node scale factor updated to: 0.9
+2024-10-25 09:20:05,718 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,732 - INFO - 更新节点图片尺寸为: 92%
+2024-10-25 09:20:05,732 - INFO - Node scale factor updated to: 0.92
+2024-10-25 09:20:05,733 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,747 - INFO - 更新节点图片尺寸为: 93%
+2024-10-25 09:20:05,747 - INFO - Node scale factor updated to: 0.93
+2024-10-25 09:20:05,748 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,762 - INFO - 更新节点图片尺寸为: 95%
+2024-10-25 09:20:05,762 - INFO - Node scale factor updated to: 0.95
+2024-10-25 09:20:05,762 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,976 - INFO - 更新节点图片尺寸为: 94%
+2024-10-25 09:20:05,976 - INFO - Node scale factor updated to: 0.94
+2024-10-25 09:20:05,976 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:05,991 - INFO - 更新节点图片尺寸为: 92%
+2024-10-25 09:20:05,992 - INFO - Node scale factor updated to: 0.92
+2024-10-25 09:20:05,992 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,007 - INFO - 更新节点图片尺寸为: 90%
+2024-10-25 09:20:06,008 - INFO - Node scale factor updated to: 0.9
+2024-10-25 09:20:06,008 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,022 - INFO - 更新节点图片尺寸为: 84%
+2024-10-25 09:20:06,023 - INFO - Node scale factor updated to: 0.84
+2024-10-25 09:20:06,023 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,037 - INFO - 更新节点图片尺寸为: 76%
+2024-10-25 09:20:06,037 - INFO - Node scale factor updated to: 0.76
+2024-10-25 09:20:06,038 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,051 - INFO - 更新节点图片尺寸为: 67%
+2024-10-25 09:20:06,052 - INFO - Node scale factor updated to: 0.67
+2024-10-25 09:20:06,052 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,064 - INFO - 更新节点图片尺寸为: 62%
+2024-10-25 09:20:06,064 - INFO - Node scale factor updated to: 0.62
+2024-10-25 09:20:06,064 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,076 - INFO - 更新节点图片尺寸为: 49%
+2024-10-25 09:20:06,076 - INFO - Node scale factor updated to: 0.49
+2024-10-25 09:20:06,076 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,087 - INFO - 更新节点图片尺寸为: 46%
+2024-10-25 09:20:06,087 - INFO - Node scale factor updated to: 0.46
+2024-10-25 09:20:06,087 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,095 - INFO - 更新节点图片尺寸为: 36%
+2024-10-25 09:20:06,095 - INFO - Node scale factor updated to: 0.36
+2024-10-25 09:20:06,095 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,102 - INFO - 更新节点图片尺寸为: 34%
+2024-10-25 09:20:06,102 - INFO - Node scale factor updated to: 0.34
+2024-10-25 09:20:06,102 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,108 - INFO - 更新节点图片尺寸为: 32%
+2024-10-25 09:20:06,108 - INFO - Node scale factor updated to: 0.32
+2024-10-25 09:20:06,109 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,115 - INFO - 更新节点图片尺寸为: 29%
+2024-10-25 09:20:06,115 - INFO - Node scale factor updated to: 0.29
+2024-10-25 09:20:06,115 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,121 - INFO - 更新节点图片尺寸为: 28%
+2024-10-25 09:20:06,121 - INFO - Node scale factor updated to: 0.28
+2024-10-25 09:20:06,122 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,127 - INFO - 更新节点图片尺寸为: 27%
+2024-10-25 09:20:06,127 - INFO - Node scale factor updated to: 0.27
+2024-10-25 09:20:06,127 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,134 - INFO - 更新节点图片尺寸为: 26%
+2024-10-25 09:20:06,134 - INFO - Node scale factor updated to: 0.26
+2024-10-25 09:20:06,135 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,478 - INFO - 更新节点图片尺寸为: 25%
+2024-10-25 09:20:06,478 - INFO - Node scale factor updated to: 0.25
+2024-10-25 09:20:06,479 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,533 - INFO - 更新节点图片尺寸为: 24%
+2024-10-25 09:20:06,534 - INFO - Node scale factor updated to: 0.24
+2024-10-25 09:20:06,534 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,556 - INFO - 更新节点图片尺寸为: 23%
+2024-10-25 09:20:06,556 - INFO - Node scale factor updated to: 0.23
+2024-10-25 09:20:06,557 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,565 - INFO - 更新节点图片尺寸为: 22%
+2024-10-25 09:20:06,565 - INFO - Node scale factor updated to: 0.22
+2024-10-25 09:20:06,565 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,572 - INFO - 更新节点图片尺寸为: 21%
+2024-10-25 09:20:06,572 - INFO - Node scale factor updated to: 0.21
+2024-10-25 09:20:06,572 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,580 - INFO - 更新节点图片尺寸为: 19%
+2024-10-25 09:20:06,580 - INFO - Node scale factor updated to: 0.19
+2024-10-25 09:20:06,580 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,588 - INFO - 更新节点图片尺寸为: 18%
+2024-10-25 09:20:06,588 - INFO - Node scale factor updated to: 0.18
+2024-10-25 09:20:06,588 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,594 - INFO - 更新节点图片尺寸为: 17%
+2024-10-25 09:20:06,594 - INFO - Node scale factor updated to: 0.17
+2024-10-25 09:20:06,594 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,602 - INFO - 更新节点图片尺寸为: 15%
+2024-10-25 09:20:06,602 - INFO - Node scale factor updated to: 0.15
+2024-10-25 09:20:06,602 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,618 - INFO - 更新节点图片尺寸为: 14%
+2024-10-25 09:20:06,618 - INFO - Node scale factor updated to: 0.14
+2024-10-25 09:20:06,618 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,626 - INFO - 更新节点图片尺寸为: 13%
+2024-10-25 09:20:06,626 - INFO - Node scale factor updated to: 0.13
+2024-10-25 09:20:06,626 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,634 - INFO - 更新节点图片尺寸为: 12%
+2024-10-25 09:20:06,634 - INFO - Node scale factor updated to: 0.12
+2024-10-25 09:20:06,634 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,642 - INFO - 更新节点图片尺寸为: 11%
+2024-10-25 09:20:06,642 - INFO - Node scale factor updated to: 0.11
+2024-10-25 09:20:06,642 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:06,667 - INFO - 更新节点图片尺寸为: 10%
+2024-10-25 09:20:06,667 - INFO - Node scale factor updated to: 0.1
+2024-10-25 09:20:06,667 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,064 - INFO - 更新节点图片尺寸为: 11%
+2024-10-25 09:20:07,064 - INFO - Node scale factor updated to: 0.11
+2024-10-25 09:20:07,065 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,072 - INFO - 更新节点图片尺寸为: 12%
+2024-10-25 09:20:07,072 - INFO - Node scale factor updated to: 0.12
+2024-10-25 09:20:07,072 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,080 - INFO - 更新节点图片尺寸为: 13%
+2024-10-25 09:20:07,080 - INFO - Node scale factor updated to: 0.13
+2024-10-25 09:20:07,080 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,088 - INFO - 更新节点图片尺寸为: 14%
+2024-10-25 09:20:07,088 - INFO - Node scale factor updated to: 0.14
+2024-10-25 09:20:07,088 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,096 - INFO - 更新节点图片尺寸为: 16%
+2024-10-25 09:20:07,096 - INFO - Node scale factor updated to: 0.16
+2024-10-25 09:20:07,096 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,104 - INFO - 更新节点图片尺寸为: 17%
+2024-10-25 09:20:07,104 - INFO - Node scale factor updated to: 0.17
+2024-10-25 09:20:07,104 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,112 - INFO - 更新节点图片尺寸为: 19%
+2024-10-25 09:20:07,112 - INFO - Node scale factor updated to: 0.19
+2024-10-25 09:20:07,113 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,120 - INFO - 更新节点图片尺寸为: 21%
+2024-10-25 09:20:07,120 - INFO - Node scale factor updated to: 0.21
+2024-10-25 09:20:07,120 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,135 - INFO - 更新节点图片尺寸为: 23%
+2024-10-25 09:20:07,135 - INFO - Node scale factor updated to: 0.23
+2024-10-25 09:20:07,136 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,158 - INFO - 更新节点图片尺寸为: 24%
+2024-10-25 09:20:07,158 - INFO - Node scale factor updated to: 0.24
+2024-10-25 09:20:07,158 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,206 - INFO - 更新节点图片尺寸为: 25%
+2024-10-25 09:20:07,206 - INFO - Node scale factor updated to: 0.25
+2024-10-25 09:20:07,206 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:07,214 - INFO - 更新节点图片尺寸为: 26%
+2024-10-25 09:20:07,214 - INFO - Node scale factor updated to: 0.26
+2024-10-25 09:20:07,214 - INFO - Drawing 6 nodes.
+2024-10-25 09:20:14,251 - INFO - 删除选中节点功能被调用
+2024-10-25 09:20:14,251 - INFO - Deleting selected nodes.
+2024-10-25 09:20:23,872 - INFO - 导出地图为 PNG 功能被调用
+2024-10-25 09:20:28,390 - INFO - 地图已成功导出为: D:/桌面/GIS软件工程/pyGISS-1024/projects/1.png
+2024-10-25 09:20:59,807 - INFO - 删除地图功能被调用
+2024-10-25 09:20:59,808 - INFO - Deleting map and nodes.
+2024-10-25 09:20:59,819 - INFO - Map data cleared.
+2024-10-25 09:20:59,819 - INFO - Node data cleared.
+2024-10-25 09:21:00,711 - INFO - 导入 Shapefile 功能被调用
+2024-10-25 09:21:11,615 - INFO - Importing shapefile: D:/桌面/whh课题组/四套中国地图：有审图号/2022 2020 2019 三套标准地图/00_中国标准地图-审图号GS(2020)4619号/中国标准地图-审图号GS(2020)4619号-shp格式/省级行政区.shp
+2024-10-25 09:21:11,620 - ERROR - Error loading shapefile: 'utf-8' codec can't decode byte 0xa3 in position 8: invalid start byte
+2024-10-25 09:21:11,620 - WARNING - Failed to decode with utf-8, trying gbk encoding.
+2024-10-25 09:21:11,777 - WARNING - CRS 未能解析为 EPSG 代码，使用默认 EPSG:4326。
+2024-10-25 09:21:11,782 - INFO - Detected CRS: EPSG:4326
+2024-10-25 09:21:11,782 - INFO - Total shapes to process: 34
+2024-10-25 09:21:11,782 - INFO - Imported 34 features from shapefile.
+2024-10-25 09:21:11,860 - INFO - Is circular projection: False
+2024-10-25 09:21:11,911 - INFO - Drawing 42 polygons.
+2024-10-25 09:21:11,939 - INFO - Drawing 0 lines.
+2024-10-25 09:21:11,991 - INFO - Drawing administrative boundaries.
+2024-10-25 09:21:12,140 - INFO - Is circular projection: False
+2024-10-25 09:21:12,142 - INFO - Shapefile imported, enabling Import Nodes button.
+2024-10-25 09:21:12,142 - INFO - Shapefile imported, enabling Import Nodes button.
+2024-10-25 09:21:24,203 - INFO - 切换投影到: EPSG:4214 - Beijing 1954
+2024-10-25 09:21:24,203 - INFO - Changing projection to: EPSG:4214 - Beijing 1954
+2024-10-25 09:21:24,224 - INFO - Projection changed to: EPSG:4214
+2024-10-25 09:21:24,245 - INFO - Node projection set to: EPSG:4214
+2024-10-25 09:21:24,308 - INFO - Is circular projection: False
+2024-10-25 09:21:24,361 - INFO - Drawing 42 polygons.
+2024-10-25 09:21:24,390 - INFO - Drawing 0 lines.
+2024-10-25 09:21:24,443 - INFO - Drawing administrative boundaries.
+2024-10-25 09:21:24,593 - INFO - Is circular projection: False
