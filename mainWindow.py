@@ -1,179 +1,271 @@
 # mainWindow.py
+# 功能：实现 GIS 应用程序的主窗口类，包括与菜单和地图小部件的交互
 
-import logging
+import sys
 from PyQt5.QtWidgets import (
-    QMainWindow, QHBoxLayout, QWidget, QMessageBox, QApplication, QFileDialog, QTextEdit
+    QApplication, QMainWindow, QMessageBox, QVBoxLayout, QWidget, QDockWidget, QTextEdit
 )
 from PyQt5.QtCore import Qt
+import logging
 from ui.menu import TGISMenu
 from ui.mapWidget import MapWidget
 from utils.utils import show_error_message
 
+
 class TGIS_MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.setWindowTitle("Extended PyGISS")
 
+        self.setWindowTitle("地图应用")  # 设置主窗口标题
+        self.resize(1000, 600)  # 设置主窗口大小
+
+        # 创建菜单部件
+        self.menu = TGISMenu(self)
+        self.menu_widget = QWidget()
+        self.menu_layout = QVBoxLayout(self.menu_widget)
+        self.menu_layout.addWidget(self.menu)
+        self.menu_widget.setFixedWidth(300)  # 增加菜单的固定宽度
+
+        # 创建地图部件
+        self.map_widget = MapWidget(self)
+
+        # 设置主窗口的中心部件为地图部件
+        self.setCentralWidget(self.map_widget)
+
+        # 创建一个 QDockWidget 来包含菜单部件
+        self.menu_dock_widget = QDockWidget("Menu", self)
+        self.menu_dock_widget.setWidget(self.menu_widget)
+        self.menu_dock_widget.setAllowedAreas(Qt.LeftDockWidgetArea)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.menu_dock_widget)
+
+        # 创建属性信息窗口
+        self.attribute_info_window = QDockWidget("Attribute Info", self)
+        self.attribute_info_text = QTextEdit()
+        self.attribute_info_text.setReadOnly(True)
+        self.attribute_info_window.setWidget(self.attribute_info_text)
+        self.attribute_info_window.setAllowedAreas(Qt.RightDockWidgetArea)
+        self.addDockWidget(Qt.RightDockWidgetArea, self.attribute_info_window)
+
+        # 创建属性表窗口
+        self.attribute_table_window = None
+
+        # 连接菜单信号和槽
+        self.menu.import_shapefile_clicked.connect(self.import_shapefile)
+        self.menu.import_nodes_clicked.connect(self.import_nodes)
+        self.menu.projection_changed.connect(self.change_projection)
+        self.menu.delete_map_clicked.connect(self.delete_map)
+        self.menu.delete_selected_nodes_clicked.connect(self.delete_selected_nodes)
+        self.menu.node_size_changed.connect(self.update_node_size)
+        self.menu.output_button_clicked.connect(self.handle_output_button_clicked)
+        self.menu.attribute_query_clicked.connect(self.perform_attribute_query)
+
+        # 连接地图部件的信号和槽
+        self.map_widget.shapefile_imported.connect(self.menu.enable_buttons)
+        self.map_widget.attribute_table_requested.connect(self.show_attribute_table)
+        self.map_widget.feature_attributes_updated.connect(self.update_attribute_info)
+
+    def import_shapefile(self) -> None:
+        """
+        导入 Shapefile 文件
+        """
         try:
-            # 获取屏幕大小
-            screen_geometry = QApplication.primaryScreen().availableGeometry()
-            screen_width = screen_geometry.width()
-            screen_height = screen_geometry.height()
-
-            # 设置主窗口大小
-            self.resize(screen_width, screen_height)
-
-            # 创建主布局，使用水平布局
-            central_widget = QWidget()
-            self.setCentralWidget(central_widget)
-            self.layout = QHBoxLayout(central_widget)
-
-            # 添加菜单和地图
-            self.menu = TGISMenu(self)
-            self.map_widget = MapWidget(self)  # 将主窗口对象 self 传递给 MapWidget
-
-            self.layout.addWidget(self.menu, stretch=1)  # 左侧菜单栏
-            self.layout.addWidget(self.map_widget, stretch=9)  # 地图显示区域
-
-            # 添加属性信息显示区域
-            self.attribute_display = QTextEdit()
-            self.attribute_display.setReadOnly(True)
-            self.attribute_display.setFixedWidth(200)  # 设置固定宽度
-            self.layout.addWidget(self.attribute_display)  # 添加到主布局
-
-            # 连接菜单信号到槽函数
-            self.menu.import_shapefile_clicked.connect(self.import_shapefile)
-            self.menu.import_nodes_clicked.connect(self.import_nodes)
-            self.menu.projection_changed.connect(self.change_projection)
-            self.menu.delete_map_clicked.connect(self.delete_map)
-            self.menu.delete_selected_nodes_clicked.connect(self.delete_selected_nodes)
-            self.menu.node_size_changed.connect(self.update_node_size)  # 连接节点尺寸调整信号
-            self.menu.export_format_changed.connect(self.handle_export_format_changed)
-            self.menu.attribute_query_clicked.connect(self.perform_attribute_query)  # 连接属性查询信号
-
-            # 连接 shapefile_imported 信号来启用 Import Nodes 按钮
-            self.map_widget.shapefile_imported.connect(self.enable_import_nodes)
-            # 连接 MapWidget 的信号
-            self.map_widget.feature_selected.connect(self.show_feature_attributes)
-
-            logging.info("主窗口初始化完成")
-        except Exception as e:
-            logging.exception("初始化主窗口时发生错误")
-            show_error_message(self, "初始化错误", f"无法初始化主窗口:\n{e}")
-            self.close()
-
-    def enable_import_nodes(self):
-        try:
-            logging.info("Shapefile imported, enabling Import Nodes button.")
+            self.map_widget.import_shapefile()
             self.menu.import_nodes_button.setEnabled(True)
         except Exception as e:
-            logging.exception("启用 Import Nodes 按钮时发生错误")
-            show_error_message(self, "错误", f"无法启用 Import Nodes 按钮:\n{e}")
-
-    def import_shapefile(self):
-        """导入 Shapefile 底图"""
-        try:
-            logging.info("导入 Shapefile 功能被调用")
-            self.map_widget.import_shapefile()
-        except Exception as e:
-            logging.exception("导入 Shapefile 时发生错误")
+            logging.error(f"Error importing shapefile: {e}")
             show_error_message(self, "导入错误", f"无法导入 Shapefile:\n{e}")
 
-    def import_nodes(self):
-        """导入节点功能"""
+    def import_nodes(self) -> None:
+        """
+        导入节点文件
+        """
         try:
-            logging.info("导入节点功能被调用")
             self.map_widget.import_nodes()
         except Exception as e:
-            logging.exception("导入节点时发生错误")
-            show_error_message(self, "导入错误", f"无法导入节点:\n{e}")
+            logging.error(f"Error importing nodes: {e}")
+            show_error_message(self, "导入错误", f"无法导入节点文件:\n{e}")
 
-    def change_projection(self, projection):
-        """更改地图投影"""
+    def change_projection(self, projection: str) -> None:
+        """
+        更改投影
+        参数:
+            projection (str): 新的投影字符串
+        """
         try:
-            logging.info(f"切换投影到: {projection}")
-            # 更新地图投影
             self.map_widget.change_projection(projection)
-            self.menu.current_projection_label.setText(f"Current Coordinate System: {projection}")
         except Exception as e:
-            logging.exception("更改地图投影时发生错误")
-            show_error_message(self, "投影错误", f"无法更改地图投影:\n{e}")
+            logging.error(f"Error changing projection: {e}")
+            show_error_message(self, "投影错误", f"无法更改投影:\n{e}")
 
-    def delete_map(self):
-        """删除地图"""
+    def delete_map(self) -> None:
+        """
+        删除地图和节点
+        """
+        self.map_widget.delete_map()
+        self.menu.import_nodes_button.setEnabled(False)
+        self.attribute_info_text.clear()
+
+    def delete_selected_nodes(self) -> None:
+        """
+        删除选中的节点
+        """
+        self.map_widget.delete_selected_nodes()
+
+    def update_node_size(self, value: int) -> None:
+        """
+        更新节点尺寸
+        参数:
+            value (int): 新的节点尺寸百分比
+        """
+        self.map_widget.update_node_size(value)
+
+    def handle_output_button_clicked(self) -> None:
+        """
+        处理输出按钮的点击事件
+        """
+        format = self.menu.export_format_combo.currentText()
+        if format.upper() == "PNG":
+            self.export_to_png()
+        elif format.upper() == "PDF":
+            self.export_to_pdf()
+        elif format.upper() == "JPG":
+            self.export_to_jpeg()
+        else:
+            show_error_message(self, "导出错误", f"不支持的导出格式: {format}")
+
+    def export_to_png(self) -> None:
+        """
+        导出地图为 PNG 文件
+        """
         try:
-            logging.info("删除地图功能被调用")
-            self.map_widget.delete_map()
+            self.map_widget.export_to_png()
+            QMessageBox.information(self, "导出成功", "地图已成功导出为 PNG 文件")
         except Exception as e:
-            logging.exception("删除地图时发生错误")
-            show_error_message(self, "删除错误", f"无法删除地图:\n{e}")
+            logging.error(f"Error exporting to PNG: {e}")
+            show_error_message(self, "导出错误", f"无法导出地图为 PNG:\n{e}")
 
-    def delete_selected_nodes(self):
-        """删除选中节点"""
+    def export_to_pdf(self) -> None:
+        """
+        导出地图为 PDF 文件
+        """
         try:
-            logging.info("删除选中节点功能被调用")
-            self.map_widget.delete_selected_nodes()
+            self.map_widget.export_to_pdf()
+            QMessageBox.information(self, "导出成功", "地图已成功导出为 PDF 文件")
         except Exception as e:
-            logging.exception("删除选中节点时发生错误")
-            show_error_message(self, "删除错误", f"无法删除选中节点:\n{e}")
+            logging.error(f"Error exporting to PDF: {e}")
+            show_error_message(self, "导出错误", f"无法导出地图为 PDF:\n{e}")
 
-    def update_node_size(self, value):
-        """更新节点图片尺寸"""
+    def export_to_jpeg(self) -> None:
+        """
+        导出地图为 JPEG 文件
+        """
         try:
-            logging.info(f"更新节点图片尺寸为: {value}%")
-            self.map_widget.update_node_size(value)
+            self.map_widget.export_to_jpeg()
+            QMessageBox.information(self, "导出成功", "地图已成功导出为 JPEG 文件")
         except Exception as e:
-            logging.exception("更新节点图片尺寸时发生错误")
-            show_error_message(self, "更新错误", f"无法更新节点图片尺寸:\n{e}")
+            logging.error(f"Error exporting to JPEG: {e}")
+            show_error_message(self, "导出错误", f"无法导出地图为 JPEG:\n{e}")
 
-    def handle_export_format_changed(self, format):
-        """处理导出格式变化的逻辑"""
-        try:
-            logging.info(f"导出地图为 {format} 功能被调用")
-            file_dialog = QFileDialog(self)
-            file_dialog.setNameFilter(f"{format.upper()} Files (*.{format.lower()})")
-            file_path, _ = file_dialog.getSaveFileName(self, f"保存地图为 {format}", "", f"{format.upper()} Files (*.{format.lower()})")
-
-            if file_path:
-                try:
-                    if format == "PNG":
-                        self.map_widget.export_to_png(file_path)
-                    elif format == "PDF":
-                        self.map_widget.export_to_pdf(file_path)
-                    elif format in ["JPG", "JPEG"]:
-                        if format == "JPG":
-                            self.map_widget.export_to_jpg(file_path)
-                        else:
-                            self.map_widget.export_to_jpeg(file_path)
-                    logging.info(f"地图已成功导出为: {file_path}")
-                    QMessageBox.information(self, "导出成功", f"地图已成功导出为: {file_path}")
-                except Exception as e:
-                    logging.error(f"导出地图失败: {e}")
-                    self.show_error_message("导出错误", f"无法导出地图为 {format}:\n{e}")
-            else:
-                logging.info("用户取消了导出操作")
-        except Exception as e:
-            logging.exception(f"导出地图为 {format} 时发生错误")
-            self.show_error_message("导出错误", f"无法导出地图为 {format}:\n{e}")
-
-    def show_error_message(self, title, message):
-        """显示错误消息框"""
-        QMessageBox.critical(self, title, message)
-
-    def show_feature_attributes(self, attributes):
-        """显示要素的属性信息"""
-        self.attribute_display.clear()
-        for key, value in attributes.items():
-            self.attribute_display.append(f"{key}: {value}")
-
-    def perform_attribute_query(self, field, value):
-        """执行属性查询并高亮符合条件的要素"""
+    def perform_attribute_query(self, field: str, value: str) -> None:
+        """
+        执行属性查询
+        参数:
+            field (str): 要查询的字段名
+            value (str): 要匹配的字段值
+        """
         try:
             matching_items = self.map_widget.perform_attribute_query(field, value)
-            if matching_items:
-                QMessageBox.information(self, "查询结果", f"找到 {len(matching_items)} 个符合条件的要素。")
-            else:
-                QMessageBox.information(self, "查询结果", "未找到符合条件的要素。")
+            if not matching_items:
+                QMessageBox.information(self, "查询结果", "未找到匹配的要素。")
         except Exception as e:
-            logging.exception("属性查询时发生错误")
-            show_error_message(self, "查询错误", f"属性查询失败:\n{e}")
+            logging.error(f"Error performing attribute query: {e}")
+            show_error_message(self, "查询错误", f"执行属性查询时发生错误:\n{e}")
+
+    def show_attribute_table(self, records: list) -> None:
+        """
+        显示属性表
+        参数:
+            records (list): 属性记录列表
+        """
+        try:
+            if not records:
+                show_error_message(self, "属性表", "当前没有可用的属性表。")
+                return
+
+            # 如果属性表窗口已存在，先关闭它
+            if self.attribute_table_window is not None:
+                self.removeDockWidget(self.attribute_table_window)
+                self.attribute_table_window.deleteLater()
+                self.attribute_table_window = None
+
+            # 创建属性表窗口
+            from PyQt5.QtWidgets import QDockWidget, QTableWidget, QTableWidgetItem
+            self.attribute_table_window = QDockWidget("属性表", self)
+            table_widget = QTableWidget()
+            table_widget.setEditTriggers(QTableWidget.NoEditTriggers)
+            table_widget.setSelectionBehavior(QTableWidget.SelectRows)
+            table_widget.setSelectionMode(QTableWidget.SingleSelection)
+
+            # 获取字段名称
+            field_names = list(records[0].keys())
+            table_widget.setColumnCount(len(field_names))
+            table_widget.setHorizontalHeaderLabels(field_names)
+
+            # 添加数据
+            table_widget.setRowCount(len(records))
+            for row, record in enumerate(records):
+                for col, field in enumerate(field_names):
+                    value = record.get(field, "")
+                    item = QTableWidgetItem(str(value))
+                    table_widget.setItem(row, col, item)
+
+            table_widget.resizeColumnsToContents()
+
+            self.attribute_table_window.setWidget(table_widget)
+            self.attribute_table_window.setAllowedAreas(Qt.BottomDockWidgetArea | Qt.TopDockWidgetArea)
+            self.addDockWidget(Qt.BottomDockWidgetArea, self.attribute_table_window)
+        except Exception as e:
+            logging.error(f"Error during showing attribute table: {e}")
+            show_error_message(self, "属性表错误", f"显示属性表时发生错误:\n{e}")
+
+    def update_attribute_info(self, attributes: dict) -> None:
+        """
+        更新属性信息面板
+        参数:
+            attributes (dict): 要素的属性字典
+        """
+        if attributes is None:
+            self.attribute_info_text.setText("未选择任何要素")
+        else:
+            attr_text = "\n".join([f"{key}: {value}" for key, value in attributes.items()])
+            self.attribute_info_text.setText(attr_text)
+
+    def closeEvent(self, event) -> None:
+        """
+        关闭事件
+        """
+        reply = QMessageBox.question(self, "退出", "确定要退出程序吗？", QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+
+
+def main() -> None:
+    """
+    设置日志记录并启动应用程序
+    """
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    logging.info("GIS 应用程序启动")
+
+    app = QApplication(sys.argv)
+    window = TGIS_MainWindow()
+    window.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    main()

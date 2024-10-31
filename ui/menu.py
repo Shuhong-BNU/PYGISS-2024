@@ -1,23 +1,22 @@
 # ui/menu.py
+# 功能：实现 TGISMenu 类，提供与地图操作相关的按钮和控件
 
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QPushButton, QComboBox, QGroupBox, QGridLayout,
-    QLabel, QSlider, QMessageBox, QMenu, QAction, QLineEdit
+    QLabel, QSlider, QMessageBox, QLineEdit
 )
 from PyQt5.QtCore import pyqtSignal, Qt
 
 class TGISMenu(QWidget):
     # 定义所有需要的信号
-    import_shapefile_clicked = pyqtSignal()
-    import_nodes_clicked = pyqtSignal()
-    projection_changed = pyqtSignal(str)
-    delete_map_clicked = pyqtSignal()
-    delete_selected_nodes_clicked = pyqtSignal()
-    node_size_changed = pyqtSignal(int)  # 用于节点图片尺寸调整
-    export_to_png_clicked = pyqtSignal()  # 新增信号-导出为png
-    export_to_pdf_clicked = pyqtSignal()  # 新增信号-导出为pdf
-    export_format_changed = pyqtSignal(str)  # 用于选择文件格式
-    attribute_query_clicked = pyqtSignal(str, str)  # 新增信号，用于属性查询
+    import_shapefile_clicked = pyqtSignal()  # 信号：导入 Shapefile
+    import_nodes_clicked = pyqtSignal()  # 信号：导入节点
+    projection_changed = pyqtSignal(str)  # 信号：投影更改
+    delete_map_clicked = pyqtSignal()  # 信号：删除地图
+    delete_selected_nodes_clicked = pyqtSignal()  # 信号：删除选中的节点
+    node_size_changed = pyqtSignal(int)  # 信号：节点图片尺寸调整
+    output_button_clicked = pyqtSignal()  # 新增信号：输出按钮点击
+    attribute_query_clicked = pyqtSignal(str, str)  # 信号：属性查询
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -25,6 +24,7 @@ class TGISMenu(QWidget):
 
         # 当前坐标系显示
         self.current_projection_label = QLabel("Current Coordinate System: ")
+        self.current_projection_label.setWordWrap(True)  # 允许自动换行
         self.layout().addWidget(self.current_projection_label)
 
         # 对象管理部分
@@ -49,12 +49,9 @@ class TGISMenu(QWidget):
         self.projection_list = QComboBox()
         self.projection_list.addItems([
             "EPSG:4326 - WGS84",
-            "EPSG:4490 - CGCS2000 (China)",
             "EPSG:3571 - North Pole LAEA Alaska",
             "EPSG:3035 - ETRS89 / LAEA Europe",
-            "EPSG:3395 - WGS 84 / World Mercator",
-            "EPSG:32649 - WGS 84 / UTM zone 49N",
-            "EPSG:4214 - Beijing 1954",
+            "EPSG:3395 - WGS 84 / World Mercator"
         ])
         self.projection_management.layout().addWidget(self.projection_list, 0, 0)
 
@@ -82,11 +79,17 @@ class TGISMenu(QWidget):
 
         # 添加新的 QComboBox 用以选择文件格式
         self.export_format_combo = QComboBox()
-        self.export_format_combo.addItems(["PDF", "PNG", "JPG", "JPEG"])
-        self.export_format_combo.currentIndexChanged.connect(self.on_export_format_changed)
+        self.export_format_combo.addItems(["PDF", "PNG", "JPG"])
+        # 移除导出格式选择时的即时触发
+        # self.export_format_combo.currentIndexChanged.connect(self.on_export_format_changed)
 
         # 将 QComboBox 添加到 Export 框的布局中
         self.export_group_box.layout().addWidget(self.export_format_combo, 0, 0)
+
+        # 添加 Output 按钮
+        output_button = QPushButton("Output")
+        output_button.clicked.connect(self.output_button_clicked.emit)
+        self.export_group_box.layout().addWidget(output_button, 1, 0)
 
         # 节点图片尺寸调整部分
         self.node_size_management = QGroupBox("Node Size Adjustment")
@@ -124,34 +127,43 @@ class TGISMenu(QWidget):
         self.query_button.clicked.connect(self.on_attribute_query)
         self.query_group_box.layout().addWidget(self.query_button, 2, 0, 1, 2)
 
-    def on_change_projection(self):
+    def on_change_projection(self) -> None:
+        """
+        更改投影
+        """
         projection = self.projection_list.currentText()
         self.projection_changed.emit(projection)
-        self.current_projection_label.setText(f"Current Coordinate System: {projection}")
+        self.current_projection_label.setText(f"Current Coordinate System:\n{projection}")
 
-    def disable_buttons(self):
-        """禁用所有按钮"""
+    def disable_buttons(self) -> None:
+        """
+        禁用所有按钮
+        """
         self.import_shapefile_button.setEnabled(False)
         self.import_nodes_button.setEnabled(False)
         # 禁用其他按钮（如有）
 
-    def enable_buttons(self):
-        """启用所有按钮"""
+    def enable_buttons(self) -> None:
+        """
+        启用所有按钮
+        """
         self.import_shapefile_button.setEnabled(True)
         self.import_nodes_button.setEnabled(True)
         # 启用其他按钮（如有）
 
-    def on_node_size_changed(self, value):
-        """当滑动条的值变化时，更新标签并发射信号"""
+    def on_node_size_changed(self, value: int) -> None:
+        """
+        当滑动条的值变化时，更新标签并发射信号
+        参数:
+            value (int): 新的节点尺寸百分比
+        """
         self.node_size_label.setText(f"Node Size: {value}%")
         self.node_size_changed.emit(value)
 
-    def on_export_format_changed(self, index):
-        """当导出格式发生变化时，发射信号"""
-        format = self.export_format_combo.itemText(index)
-        self.export_format_changed.emit(format)
-
-    def on_attribute_query(self):
+    def on_attribute_query(self) -> None:
+        """
+        执行属性查询
+        """
         field = self.field_input.text()
         value = self.value_input.text()
         if field and value:
